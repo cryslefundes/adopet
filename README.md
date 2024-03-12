@@ -35,6 +35,7 @@ Here you list all prerequisites necessary for running your project. For example:
 
 - [Java 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 - [Docker](https://docs.docker.com/get-docker/)
+- [Spring 3.2.3](https://spring.io)
 
 Spring dependencies will be found in `pom.xml` file in the root of the project.
 
@@ -81,21 +82,31 @@ Here you will find all the endpoints, HTTP methods accepted and their descriptio
 
 <h3>Shelters</h3>
 
-| route                         | description                                            |
-|-------------------------------|--------------------------------------------------------|
-| <kbd>GET /shelters</kbd>      | Retrieves a page containing 10 shelters each.          |
-| <kbd>GET /shelters/{id}</kbd> | Retrieves  a shelter according to id in path variable. |
-| <kbd>POST /shelters</kbd>     | Register a shelter.                                    |
-| <kbd>PUT /shelters</kbd>      | Update a shelter.                                      |
+| route                         | description                                                   |
+|-------------------------------|---------------------------------------------------------------|
+| <kbd>GET /shelters</kbd>      | Retrieves a page containing 10 shelters each sorting by name. |
+| <kbd>GET /shelters/{id}</kbd> | Retrieves  a shelter according to id in path variable.        |
+| <kbd>POST /shelters</kbd>     | Register a shelter.                                           |
+| <kbd>PUT /shelters</kbd>      | Update a shelter.                                             |
+
+
+<h3>Tutors</h3>
+
+| route                       | description                                                 |
+|-----------------------------|-------------------------------------------------------------|
+| <kbd>GET /tutors</kbd>      | Retrieves a page containing 10 tutors each sorting by name. |
+| <kbd>GET /tutors/{id}</kbd> | Retrieves  a tutor according to id in path variable.        |
+| <kbd>POST /tutors</kbd>     | Register a shelter.                                         |
+| <kbd>PUT /tutors</kbd>      | Update a shelter.                                           |
 
 
 <h2 id="contribute">📫 Contribute</h2>
 
 To contribute, you be able to use git flow, you just need to follow this steps:
 
-1. `git clone git clone https://github.com/CrysLef/adopet.git`
+1. `git clone https://github.com/CrysLef/adopet.git`
 2. `git flow feature start FEATURE_NAME`
-3. Follow commit patterns using `feat: ` when you need to add a feature in the project
+3. Follow commit patterns using `feat: ` when you want to add a feature in the project
 4. Finished the feature, you just need to execute this command: `git flow feature finish FEATURE_NAME`
 5. Open a Pull Request explaining the problem solved or feature made, if exists, append screenshot of visual modifications and wait for the review!
 
