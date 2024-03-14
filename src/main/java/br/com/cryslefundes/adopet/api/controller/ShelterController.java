@@ -6,15 +6,14 @@ import br.com.cryslefundes.adopet.api.core.dto.shelter.UpdateShelterDTO;
 import br.com.cryslefundes.adopet.api.service.ShelterService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
 import java.util.UUID;
 
 @RestController
@@ -24,7 +23,7 @@ public class ShelterController {
     private ShelterService service;
 
     @GetMapping
-    public ResponseEntity<Page<ShelterDTO>> showAllShelters(@PageableDefault(sort = "name") Pageable pagination) {
+    public ResponseEntity<Page<ShelterDTO>> showAllShelters(@ParameterObject @PageableDefault(sort = "name") Pageable pagination) {
         return ResponseEntity.ok(service.showAllShelters(pagination));
     }
 
