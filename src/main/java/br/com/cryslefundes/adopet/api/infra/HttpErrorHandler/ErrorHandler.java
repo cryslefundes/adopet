@@ -2,6 +2,7 @@ package br.com.cryslefundes.adopet.api.infra.HttpErrorHandler;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ValidationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -20,6 +21,12 @@ public class ErrorHandler {
     public ResponseEntity handlerError400(MethodArgumentNotValidException ex) {
         var errors = ex.getFieldErrors();
         return ResponseEntity.badRequest().body(errors.stream().map(ValidErrorDTO::new).toList());
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handlerError400(DataIntegrityViolationException ex) {
+        var messageError = ex.getMessage().split("Key ")[1].split("]")[0];
+        return ResponseEntity.badRequest().body("Error: " + messageError);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
