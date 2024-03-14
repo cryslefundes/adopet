@@ -1,0 +1,15 @@
+
+services:
+  postgres-db:
+    image: 'postgres:16-alpine3.18'
+    environment:
+      POSTGRES_DB: 'adopet'
+      POSTGRES_PASSWORD: 'admin'
+    ports:
+      - '15432:5432'
+
+  rabbitmq:
+    image: 'rabbitmq:3.13-management-alpine'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
