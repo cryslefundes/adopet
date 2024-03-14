@@ -5,6 +5,7 @@ import br.com.cryslefundes.adopet.api.core.dto.shelter.ShelterDTO;
 import br.com.cryslefundes.adopet.api.core.dto.shelter.UpdateShelterDTO;
 import br.com.cryslefundes.adopet.api.core.entity.Address;
 import br.com.cryslefundes.adopet.api.core.entity.Shelter;
+import br.com.cryslefundes.adopet.api.producer.EmailProducer;
 import br.com.cryslefundes.adopet.api.repository.ShelterRepository;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -31,6 +32,8 @@ class ShelterServiceTest {
     private ShelterService service;
     @Mock
     private ShelterRepository repository;
+    @Mock
+    private EmailProducer producer;
     @Mock
     private UpdateShelterDTO dto;
     @Mock

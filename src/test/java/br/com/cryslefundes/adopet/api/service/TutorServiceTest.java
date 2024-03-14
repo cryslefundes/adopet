@@ -5,6 +5,7 @@ import br.com.cryslefundes.adopet.api.core.dto.tutors.TutorDTO;
 import br.com.cryslefundes.adopet.api.core.dto.tutors.UpdateTutorDTO;
 import br.com.cryslefundes.adopet.api.core.entity.Address;
 import br.com.cryslefundes.adopet.api.core.entity.Tutor;
+import br.com.cryslefundes.adopet.api.producer.EmailProducer;
 import br.com.cryslefundes.adopet.api.repository.TutorRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +30,8 @@ class TutorServiceTest {
     private TutorService service;
     @Mock
     private TutorRepository repository;
+    @Mock
+    private EmailProducer producer;
     @Mock
     private UpdateTutorDTO dto;
     @Mock

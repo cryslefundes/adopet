@@ -1,5 +1,6 @@
 package br.com.cryslefundes.adopet.api.service;
 
+import br.com.cryslefundes.adopet.api.core.dto.EmailDTO;
 import br.com.cryslefundes.adopet.api.core.dto.adoption.ApprovedAdoptionDTO;
 import br.com.cryslefundes.adopet.api.core.dto.adoption.DeniedAdoptionDTO;
 import br.com.cryslefundes.adopet.api.core.dto.adoption.RequestedAdoptionDTO;
@@ -7,6 +8,7 @@ import br.com.cryslefundes.adopet.api.core.entity.Adoption;
 import br.com.cryslefundes.adopet.api.core.entity.Pet;
 import br.com.cryslefundes.adopet.api.core.entity.Tutor;
 import br.com.cryslefundes.adopet.api.core.enums.AdoptionStatus;
+import br.com.cryslefundes.adopet.api.producer.EmailProducer;
 import br.com.cryslefundes.adopet.api.repository.AdoptionRepository;
 import br.com.cryslefundes.adopet.api.repository.PetRepository;
 import br.com.cryslefundes.adopet.api.repository.TutorRepository;
@@ -38,6 +40,8 @@ class AdoptionServiceTest {
     private PetRepository petRepository;
     @Mock
     private TutorRepository tutorRepository;
+    @Mock
+    private EmailProducer producer;
     @Mock
     private Pet pet;
     @Mock
@@ -91,6 +95,7 @@ class AdoptionServiceTest {
         var dto = new ApprovedAdoptionDTO(UUID.randomUUID());
         given(repository.getReferenceById(dto.id())).willReturn(adoption);
         given(adoption.getPet()).willReturn(pet);
+        given(adoption.getTutor()).willReturn(tutor);
         given(pet.getAdopted()).willReturn(true);
 
         service.approveAdoption(dto);
@@ -107,6 +112,7 @@ class AdoptionServiceTest {
     void shouldDeniedAnAdoption() {
         var dto = new DeniedAdoptionDTO(UUID.randomUUID(), "any");
         given(repository.getReferenceById(dto.id())).willReturn(adoption);
+        given(adoption.getTutor()).willReturn(tutor);
 
         service.disapproveAdoption(dto);
 
