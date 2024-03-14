@@ -6,6 +6,7 @@ import br.com.cryslefundes.adopet.api.core.dto.tutors.UpdateTutorDTO;
 import br.com.cryslefundes.adopet.api.service.TutorService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +23,7 @@ public class TutorController {
     private TutorService service;
 
     @GetMapping
-    public ResponseEntity<Page<TutorDTO>> showAllTutors(@PageableDefault(sort = "name") Pageable pagination) {
+    public ResponseEntity<Page<TutorDTO>> showAllTutors(@ParameterObject @PageableDefault(sort = "name") Pageable pagination) {
         return ResponseEntity.ok(service.showAllTutors(pagination));
     }
 

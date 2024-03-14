@@ -6,6 +6,7 @@ import br.com.cryslefundes.adopet.api.core.dto.pet.UpdatePetDTO;
 import br.com.cryslefundes.adopet.api.service.PetService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +23,7 @@ public class PetController {
     private PetService service;
 
     @GetMapping
-    public ResponseEntity<Page<PetDTO>> showAllPetsAvailable(@PageableDefault(sort = "breed")Pageable pagination) {
+    public ResponseEntity<Page<PetDTO>> showAllPetsAvailable(@ParameterObject @PageableDefault(sort = "breed")Pageable pagination) {
         return ResponseEntity.ok(service.showAllPetsAvailable(pagination));
     }
 
