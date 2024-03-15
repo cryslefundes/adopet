@@ -145,7 +145,7 @@ To contribute, you be able to use git flow, you just need to follow this steps:
 [💾 Commit pattern](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716)
 
 <h2 id="contribute">📚 References</h2>
-I feel inspired by this:
+
 - [Alura Course](https://github.com/alura-cursos/3349-boas-praticas-java-testes)
 - [Michelli Brito](https://github.com/MichelliBrito/microservices-na-pratica/tree/main)
 - [Marcos's Medium](https://mmarcosab.medium.com/tutorial-rabbitmq-com-spring-boot-480e3a6682e6)
