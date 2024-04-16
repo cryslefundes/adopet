@@ -11,13 +11,13 @@ public record RegisterTutorDTO (
         @NotBlank
         String name,
         @NotBlank
-        @Pattern(regexp = "\\(?\\d{2}\\)?\\d?\\d{4}-?\\d{4}")
+        @Pattern(regexp = "\\(?\\d{2}\\)?\\d?\\d{4}-?\\d{4}", message = "Phone number format invalid")
         String phone,
         @NotBlank
         @Email
         String email,
         @NotBlank
-        @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}")
+        @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "Please, request like this: 000.000.000-00")
         String document,
         @NotNull
         @Valid
