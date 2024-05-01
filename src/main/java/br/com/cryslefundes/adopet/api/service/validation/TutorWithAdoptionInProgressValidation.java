@@ -14,9 +14,9 @@ public class TutorWithAdoptionInProgressValidation implements IValidation<Reques
 
     @Override
     public void validate(RequestedAdoptionDTO dto) {
-        Boolean isTutorWithAdoptionInProgress =  adoptionRepository.existsByTutorIdAndStatus(dto.idTutor(), AdoptionStatus.WAITING_EVALUATION);
+        Boolean isTutorWithAdoptionInProgress =  adoptionRepository.existsByTutorIdAndStatus(dto.tutorId(), AdoptionStatus.WAITING_EVALUATION);
 
-        if (isTutorWithAdoptionInProgress) {
+        if (Boolean.TRUE.equals(isTutorWithAdoptionInProgress)) {
             throw new ValidationException("This tutor already has an adoption in progress.");
         }
     }
