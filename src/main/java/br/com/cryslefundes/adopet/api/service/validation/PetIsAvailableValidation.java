@@ -13,8 +13,8 @@ public class PetIsAvailableValidation implements IValidation<RequestedAdoptionDT
 
     @Override
     public void validate(RequestedAdoptionDTO dto) {
-        Boolean isPetAvailable = petRepository.existsByIdAndAdopted(dto.idPet(), false);
-        if (!isPetAvailable) {
+        Boolean isPetAvailable = petRepository.existsByIdAndAdopted(dto.petId(), false);
+        if (Boolean.FALSE.equals(isPetAvailable)) {
             throw new ValidationException("This pet is already adopted.");
         }
     }
