@@ -21,7 +21,9 @@ public record PetDTO(
         Boolean adopted,
         Float weight,
         @NotNull
-        PetType type,
+        PetType petType,
+        @NotNull
+        UUID shelterId,
         @NotNull
         URI location
 ) {
@@ -33,7 +35,8 @@ public record PetDTO(
                 pet.getAge(),
                 pet.getAdopted(),
                 pet.getWeight(),
-                pet.getType(),
+                pet.getPetType(),
+                pet.getShelter().getId(),
                 UriComponentsBuilder.newInstance()
                         .path("/pets/{id}")
                         .buildAndExpand(pet.getId())
