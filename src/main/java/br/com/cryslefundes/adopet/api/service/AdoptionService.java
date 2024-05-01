@@ -66,8 +66,8 @@ public class AdoptionService implements AdoptionUseCase {
 
     @Override
     public AdoptionDTO requestAdoption(RequestedAdoptionDTO dto) {
-        Pet pet = petRepository.getReferenceById(dto.idPet());
-        Tutor tutor = tutorRepository.getReferenceById(dto.idTutor());
+        Pet pet = petRepository.getReferenceById(dto.petId());
+        Tutor tutor = tutorRepository.getReferenceById(dto.tutorId());
 
         validations.forEach(v -> v.validate(dto));
 
