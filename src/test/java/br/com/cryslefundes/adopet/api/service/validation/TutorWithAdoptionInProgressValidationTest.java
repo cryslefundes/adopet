@@ -27,7 +27,7 @@ class TutorWithAdoptionInProgressValidationTest {
     @DisplayName("Should validate when a tutor doesnt have an adoption in progress")
     void shouldValidateTutorWithoutAdoptionInProgress() {
         var dto = new RequestedAdoptionDTO(UUID.randomUUID(), UUID.randomUUID(), "any");
-        when(repository.existsByTutorIdAndStatus(dto.idTutor(), AdoptionStatus.WAITING_EVALUATION)).thenReturn(false);
+        when(repository.existsByTutorIdAndStatus(dto.tutorId(), AdoptionStatus.WAITING_EVALUATION)).thenReturn(false);
 
         assertDoesNotThrow(() -> tutorValidation.validate(dto));
     }
@@ -36,7 +36,7 @@ class TutorWithAdoptionInProgressValidationTest {
     @DisplayName("Should not validate when a tutor has an adoption in progress")
     void shouldNotValidateTutorWithAdoptionInProgress() {
         var dto = new RequestedAdoptionDTO(UUID.randomUUID(), UUID.randomUUID(), "any");
-        when(repository.existsByTutorIdAndStatus(dto.idTutor(), AdoptionStatus.WAITING_EVALUATION)).thenReturn(true);
+        when(repository.existsByTutorIdAndStatus(dto.tutorId(), AdoptionStatus.WAITING_EVALUATION)).thenReturn(true);
 
         assertThrows(ValidationException.class, () -> tutorValidation.validate(dto));
     }

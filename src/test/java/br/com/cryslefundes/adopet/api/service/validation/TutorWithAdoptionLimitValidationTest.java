@@ -27,7 +27,7 @@ class TutorWithAdoptionLimitValidationTest {
     @DisplayName("Should validate when a tutor doesnt reached adoption limit")
     void shouldValidateTutorDoesNotReachedAdoptionLimit() {
         var dto = new RequestedAdoptionDTO(UUID.randomUUID(), UUID.randomUUID(), "any");
-        when(repository.countByStatusAndTutorId(AdoptionStatus.APPROVED, dto.idTutor())).thenReturn(3L);
+        when(repository.countByStatusAndTutorId(AdoptionStatus.APPROVED, dto.tutorId())).thenReturn(3L);
 
         assertDoesNotThrow(() -> tutorValidation.validate(dto));
     }
@@ -36,7 +36,7 @@ class TutorWithAdoptionLimitValidationTest {
     @DisplayName("Should not validate when a tutor reached adoption limit")
     void shoulNotdValidateTutorReachedAdoptionLimit() {
         var dto = new RequestedAdoptionDTO(UUID.randomUUID(), UUID.randomUUID(), "any");
-        when(repository.countByStatusAndTutorId(AdoptionStatus.APPROVED, dto.idTutor())).thenReturn(5L);
+        when(repository.countByStatusAndTutorId(AdoptionStatus.APPROVED, dto.tutorId())).thenReturn(5L);
 
         assertThrows(ValidationException.class, () -> tutorValidation.validate(dto));
     }
