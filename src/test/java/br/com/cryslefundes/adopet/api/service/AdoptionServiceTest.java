@@ -1,6 +1,5 @@
 package br.com.cryslefundes.adopet.api.service;
 
-import br.com.cryslefundes.adopet.api.core.dto.EmailDTO;
 import br.com.cryslefundes.adopet.api.core.dto.adoption.ApprovedAdoptionDTO;
 import br.com.cryslefundes.adopet.api.core.dto.adoption.DeniedAdoptionDTO;
 import br.com.cryslefundes.adopet.api.core.dto.adoption.RequestedAdoptionDTO;
@@ -61,8 +60,8 @@ class AdoptionServiceTest {
     @DisplayName("Should save an adoption on the database when someone request an adoption")
     void shouldSaveAdoption() {
         var dto = new RequestedAdoptionDTO(UUID.randomUUID(), UUID.randomUUID(), "any");
-        given(petRepository.getReferenceById(dto.idPet())).willReturn(pet);
-        given(tutorRepository.getReferenceById(dto.idTutor())).willReturn(tutor);
+        given(petRepository.getReferenceById(dto.petId())).willReturn(pet);
+        given(tutorRepository.getReferenceById(dto.tutorId())).willReturn(tutor);
 
         service.requestAdoption(dto);
 
@@ -78,8 +77,8 @@ class AdoptionServiceTest {
     @DisplayName("Should pass through in a validation list when someone request an adoption")
     void shouldValidateRequestedAdoptionDTO() {
         var dto = new RequestedAdoptionDTO(UUID.randomUUID(), UUID.randomUUID(), "any");
-        given(petRepository.getReferenceById(dto.idPet())).willReturn(pet);
-        given(tutorRepository.getReferenceById(dto.idTutor())).willReturn(tutor);
+        given(petRepository.getReferenceById(dto.petId())).willReturn(pet);
+        given(tutorRepository.getReferenceById(dto.tutorId())).willReturn(tutor);
         validations.add(validation1);
         validations.add(validation2);
 
