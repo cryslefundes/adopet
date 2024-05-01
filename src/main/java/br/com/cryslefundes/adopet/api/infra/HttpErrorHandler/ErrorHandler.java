@@ -21,8 +21,8 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity handlerError400(MethodArgumentNotValidException ex) {
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public ResponseEntity handlerError422(MethodArgumentNotValidException ex) {
         var errors = ex.getFieldErrors();
         return ResponseEntity.badRequest().body(errors.stream().map(ValidErrorDTO::new).toList());
     }
