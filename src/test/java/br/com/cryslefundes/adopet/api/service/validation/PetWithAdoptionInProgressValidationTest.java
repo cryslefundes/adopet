@@ -27,7 +27,7 @@ class PetWithAdoptionInProgressValidationTest {
     @DisplayName("Should validate pet with adoption not in progress")
     void shouldValidatePetAdoptionNotInProgress() {
         var dto = new RequestedAdoptionDTO(UUID.randomUUID(), UUID.randomUUID(), "any");
-        when(repository.existsByPetIdAndStatus(dto.idPet(), AdoptionStatus.WAITING_EVALUATION)).thenReturn(false);
+        when(repository.existsByPetIdAndStatus(dto.petId(), AdoptionStatus.WAITING_EVALUATION)).thenReturn(false);
 
         assertDoesNotThrow(() -> petValidation.validate(dto));
     }
@@ -36,7 +36,7 @@ class PetWithAdoptionInProgressValidationTest {
     @DisplayName("Should not validate pet with adoption in progress")
     void shouldNotValidatePetAdoptionInProgress() {
         var dto = new RequestedAdoptionDTO(UUID.randomUUID(), UUID.randomUUID(), "any");
-        when(repository.existsByPetIdAndStatus(dto.idPet(), AdoptionStatus.WAITING_EVALUATION)).thenReturn(true);
+        when(repository.existsByPetIdAndStatus(dto.petId(), AdoptionStatus.WAITING_EVALUATION)).thenReturn(true);
 
         assertThrows(ValidationException.class, () -> petValidation.validate(dto));
     }

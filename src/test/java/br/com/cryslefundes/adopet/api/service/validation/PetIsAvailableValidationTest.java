@@ -26,7 +26,7 @@ class PetIsAvailableValidationTest {
     @DisplayName("Should validate a pet that is available")
     void shouldValidatePetAvailable() {
         var dto = new RequestedAdoptionDTO(UUID.randomUUID(), UUID.randomUUID(), "any");
-        when(repository.existsByIdAndAdopted(dto.idPet(), false)).thenReturn(true);
+        when(repository.existsByIdAndAdopted(dto.petId(), false)).thenReturn(true);
 
         assertDoesNotThrow(() -> petValidation.validate(dto));
     }
@@ -35,7 +35,7 @@ class PetIsAvailableValidationTest {
     @DisplayName("Should not validate a pet that is not available")
     void shouldNotValidatePetNotAvailable() {
         var dto = new RequestedAdoptionDTO(UUID.randomUUID(), UUID.randomUUID(), "any");
-        when(repository.existsByIdAndAdopted(dto.idPet(), false)).thenReturn(false);
+        when(repository.existsByIdAndAdopted(dto.petId(), false)).thenReturn(false);
 
         assertThrows(ValidationException.class, () -> petValidation.validate(dto));
     }
