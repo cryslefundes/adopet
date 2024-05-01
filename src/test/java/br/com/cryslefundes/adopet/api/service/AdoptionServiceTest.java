@@ -103,7 +103,7 @@ class AdoptionServiceTest {
         then(adoption.getPet()).should().markAsAdopted();
 
         assertThat(adoption.getStatus()).isEqualTo(AdoptionStatus.APPROVED);
-        assertThat(adoption.getPet().getAdopted()).isEqualTo(true);
+        assertThat(adoption.getPet().getAdopted()).isTrue();
     }
 
     @Test
