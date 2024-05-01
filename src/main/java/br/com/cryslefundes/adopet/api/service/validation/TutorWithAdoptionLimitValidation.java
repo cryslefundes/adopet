@@ -14,7 +14,7 @@ public class TutorWithAdoptionLimitValidation implements IValidation<RequestedAd
 
     @Override
     public void validate(RequestedAdoptionDTO dto) {
-        long adoptionCount = adoptionRepository.countByStatusAndTutorId(AdoptionStatus.APPROVED, dto.idTutor());
+        long adoptionCount = adoptionRepository.countByStatusAndTutorId(AdoptionStatus.APPROVED, dto.tutorId());
 
         if (adoptionCount >= 5L) {
             throw new ValidationException("Tutor has reached the adoption limit.");
