@@ -14,9 +14,9 @@ public class PetWithAdoptionInProgressValidation implements IValidation<Requeste
 
     @Override
     public void validate(RequestedAdoptionDTO dto) {
-        Boolean isPetWithAdoptionInProgress = adoptionRepository.existsByPetIdAndStatus(dto.idPet(), AdoptionStatus.WAITING_EVALUATION);
+        Boolean isPetWithAdoptionInProgress = adoptionRepository.existsByPetIdAndStatus(dto.petId(), AdoptionStatus.WAITING_EVALUATION);
 
-        if (isPetWithAdoptionInProgress) {
+        if (Boolean.TRUE.equals(isPetWithAdoptionInProgress)) {
             throw new ValidationException("This pet already has an adoption in progress.");
         }
     }
