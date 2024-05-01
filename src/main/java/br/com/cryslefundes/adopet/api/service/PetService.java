@@ -4,8 +4,10 @@ import br.com.cryslefundes.adopet.api.core.dto.pet.PetDTO;
 import br.com.cryslefundes.adopet.api.core.dto.pet.RegisterPetDTO;
 import br.com.cryslefundes.adopet.api.core.dto.pet.UpdatePetDTO;
 import br.com.cryslefundes.adopet.api.core.entity.Pet;
+import br.com.cryslefundes.adopet.api.core.entity.Shelter;
 import br.com.cryslefundes.adopet.api.core.useCase.PetUseCase;
 import br.com.cryslefundes.adopet.api.repository.PetRepository;
+import br.com.cryslefundes.adopet.api.repository.ShelterRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,10 +21,12 @@ import java.util.UUID;
 public class PetService implements PetUseCase {
     @Autowired
     private PetRepository repository;
+    @Autowired
+    private ShelterRepository shelterRepository;
 
     @Override
     public Page<PetDTO> showAllPetsAvailable(Pageable pagination) {
-       return repository.findAllByAdoptedFalse(pagination);
+       return repository.findAllByAdoptedFalse(pagination).map(PetDTO::new);
     }
 
     @Override
@@ -38,7 +42,15 @@ public class PetService implements PetUseCase {
 
     @Override
     public PetDTO registerPet(RegisterPetDTO dto) {
-        Pet pet = new Pet(dto);
+        Shelter shelter = shelterRepository.getReferenceById(dto.shelterId());
+        Pet pet = new Pet(
+                dto.name(),
+                dto.breed(),
+                dto.age(),
+                dto.weight(),
+                dto.type(),
+                shelter
+        );
         repository.save(pet);
         return new PetDTO(pet);
     }
