@@ -1,6 +1,5 @@
 package br.com.cryslefundes.adopet.api.core.entity;
 
-import br.com.cryslefundes.adopet.api.core.dto.pet.RegisterPetDTO;
 import br.com.cryslefundes.adopet.api.core.dto.pet.UpdatePetDTO;
 import br.com.cryslefundes.adopet.api.core.enums.PetType;
 import jakarta.persistence.*;
@@ -26,25 +25,26 @@ public class Pet {
     private Boolean adopted;
     private Float weight;
     @Enumerated(EnumType.STRING)
-    private PetType type;
+    private PetType petType;
     @OneToOne(mappedBy = "pet", fetch = FetchType.LAZY)
     private Adoption adoption;
     @ManyToOne(fetch = FetchType.LAZY)
     private Shelter shelter;
 
-    public Pet(RegisterPetDTO dto) {
-        this.name = dto.name();
-        this.breed = dto.breed();
-        this.age = dto.age();
+    public Pet(String name, String breed, Integer age, Float weight, String type, Shelter shelter) {
+        this.name = name;
+        this.breed = breed;
+        this.age = age;
         this.adopted = false;
-        this.weight = getWeight();
-        this.type = dto.type();
+        this.weight = weight;
+        this.shelter = shelter;
+        this.petType = PetType.fromString(type.toUpperCase().trim());
     }
 
     public void updateInfo(UpdatePetDTO dto) {
         if (dto.name() != null) this.name = dto.name();
         if (dto.age() != null) this.age = dto.age();
-        if (dto.type() != null) this.type = dto.type();
+        if (dto.petType() != null) this.petType = dto.petType();
         if (dto.breed() != null) this.breed = dto.breed();
         if (dto.weight() != null) this.weight = dto.weight();
     }
