@@ -4,7 +4,7 @@ import br.com.cryslefundes.adopet.api.core.dto.pet.PetDTO;
 import br.com.cryslefundes.adopet.api.core.dto.pet.RegisterPetDTO;
 import br.com.cryslefundes.adopet.api.core.dto.pet.UpdatePetDTO;
 import br.com.cryslefundes.adopet.api.core.entity.Pet;
-import br.com.cryslefundes.adopet.api.core.enums.PetType;
+import br.com.cryslefundes.adopet.api.core.entity.Shelter;
 import br.com.cryslefundes.adopet.api.service.PetService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,10 +44,17 @@ class PetControllerTest {
                 "chihuahua",
                 5,
                 5.8f,
-                PetType.DOG
+                UUID.randomUUID(),
+                "dog"
         );
-
-        Pet pet = new Pet(registerPetDTO);
+        Pet pet = new Pet(
+                registerPetDTO.name(),
+                registerPetDTO.breed(),
+                registerPetDTO.age(),
+                registerPetDTO.weight(),
+                registerPetDTO.type(),
+                new Shelter()
+        );
         given(service.registerPet(registerPetDTO)).willReturn(new PetDTO(pet));
 
         var response = mvc.perform(
